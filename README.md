@@ -1,2 +1,2 @@
 # Legal-AI-Agentic-RAG
-Agentic RAG for Legal Analysis and Evaluation.
+Multi-Agent Legal Contract Analyzer using LLM Routing, Vector Databases, and LangGraph
