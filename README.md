@@ -25,7 +25,7 @@ The system uses **LangGraph for agent orchestration, Groq LLMs for reasoning, an
 
 The result is a **grounded legal analysis** system that cites evidence from retrieved documents instead of hallucinating answers.
 
-
+##Architecture
 
 
 
