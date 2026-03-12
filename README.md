@@ -197,7 +197,7 @@ The clause under review is a liability exemption clause which states that the Co
 
 * Risk Level
   
-[HIGH]
+  [HIGH]
 
 * Risk Analysis
   
@@ -239,6 +239,7 @@ To reduce legal risk, the clause should be narrowed to include clearly defined l
 - Improved risk scoring models
 
 
-
+##  Author
+ ADITHYA KL
 
 
