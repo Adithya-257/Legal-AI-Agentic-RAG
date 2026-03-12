@@ -29,7 +29,9 @@ The result is a **grounded legal analysis** system that cites evidence from retr
 
 <img width="1102" height="287" alt="Legal ai visual copy" src="https://github.com/user-attachments/assets/36e69fb4-07a3-4bee-8758-479e37738833" />
 
+##  Agent Roles
 
+###   LLM Router
 
 
   
