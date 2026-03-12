@@ -31,7 +31,63 @@ The result is a **grounded legal analysis** system that cites evidence from retr
 
 ##  Agent Roles
 
+###  Knowledge Base Structure
+The system uses four specialized vector databases, each storing a different category of legal knowledge.
+Instead of querying a single large database, the LLM Router selects the most relevant databases, improving retrieval quality and reducing noise.
+
+1. DB-A — Legal Definitions
+  Contains explanations of legal terminology and contract language.
+
+  Example content:
+  
+  * clause definitions
+  * legal terminology explanations
+  * glossary-style references
+    
+Purpose: Helps the system interpret legal terms appearing in clauses.
+
+2. DB-B — Risk Patterns
+   Contains examples of common contractual risks and legal red flags.
+   
+   Example content:
+   
+   * indemnification risks
+   * liability clauses
+   * confidentiality breaches
+   * dispute resolution issues
+  
+Purpose: Allows the system to detect risky clause structures and potential legal exposure.
+
+3. DB-C — Legal Standards & Best Practices
+
+  Contains industry-standard drafting practices and regulatory guidance.
+
+  Example content:
+
+  * compliance requirements
+  * recommended clause structures
+  * legal drafting best practices
+
+Purpose: Allows the system to compare clauses against accepted legal standards.
+
+4. DB-D — Summary Guidelines
+   Contains knowledge used for final analysis synthesis.
+
+   Example Content:
+
+    * risk summarization patterns
+    * legal analysis templates
+    * audit reasoning guidance
+   
+  Purpose: Helps structure the final legal analysis and recommendations.
+
+
+
+Using multiple specialized databases enables targeted retrieval. It helps the LLM Router to select relevant knowledge bases, this helps the retriever to query only those relevant databases. Resulting in a Higher relevance context and better legal reasoning.  This approach improves retrieval precision, reasoning accuracy and scalability of the knowledge base.
+
 ###   LLM Router
+Uses an LLM to determine which legal databases are relevant for a given clause.
+
 
 
   
