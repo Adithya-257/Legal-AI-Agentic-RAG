@@ -189,7 +189,7 @@ or claims of any kind arising from the performance of this Agreement.
 <img width="335" height="84" alt="image" src="https://github.com/user-attachments/assets/97ee13a2-8126-4403-8f85-b23caa76e18f" />
 
 
-Legal Risk Analysis Report
+##  Legal Risk Analysis Report
 
 * Clause Summary
 
@@ -200,18 +200,23 @@ The clause under review is a liability exemption clause which states that the Co
 [HIGH]
 
 * Risk Analysis
+  
 The clause presents a high level of risk due to its sweeping liability exclusion. By stating that the contractor shall not  be liable for any damages, losses, or claims of any kind, the clause removes virtually all responsibility from the contractor without defining clear limits or exceptions. Such language may unintentionally exempt the contractor even in cases of negligence or misconduct. This imbalance may be considered unreasonable or unenforceable depending on jurisdiction. Additionally, courts may interpret such clauses narrowly if they conflict with statutory obligations or public policy protections.
 
 * Identified Risks
+  
 Several risks arise from this clause. First, the extremely broad language introduces ambiguity and increases the likelihood of disputes over interpretation. Second, the clause may unintentionally shield the contractor from liability for negligent or improper performance. Third, the clause may be challenged legally if it appears to unfairly shift all risk to the other contracting party. Similar liability waivers have historically been invalidated when they were considered overly broad or inconsistent with statutory protections. Finally, the clause may create enforcement risks if it conflicts with mandatory legal obligations.
 
 * Best Practice Deviations
+  
 The clause deviates from standard legal drafting practices by failing to include reasonable limitations or carve-outs. Best practice clauses typically exclude liability only for specific categories of damages or include exceptions for gross negligence, fraud, or wilful misconduct. Additionally, well-drafted contracts aim to maintain balanced risk allocation between parties. The current wording may therefore be viewed as disproportionate and inconsistent with widely accepted contractual standards.
 
 * Recommendations
+  
 To reduce legal risk, the clause should be narrowed to include clearly defined limitations. Exceptions should be added for gross negligence, fraud, or wilful misconduct to ensure the clause remains enforceable. Liability caps may also be introduced to balance protection while maintaining fairness between parties. It is also advisable to align the clause with standard contractual language commonly used in commercial agreements. Finally, the clause should be reviewed in the context of the entire contract to ensure consistency with the agreement’s overall risk allocation framework.
 
 * Metadata
+  
 {
   "confidence_score": 0.8,
   "cited_chunks": [
