@@ -239,7 +239,3 @@ To reduce legal risk, the clause should be narrowed to include clearly defined l
 - Improved risk scoring models
 
 
-##  Author
- ADITHYA KL
-
-
