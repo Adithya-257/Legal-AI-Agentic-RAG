@@ -1,4 +1,5 @@
 # Legal-AI-Agentic-RAG
+
 Multi-Agent Legal Contract Analyzer using LLM Routing, Vector Databases, and LangGraph
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue)
@@ -6,16 +7,19 @@ Multi-Agent Legal Contract Analyzer using LLM Routing, Vector Databases, and Lan
 ![ChromaDB](https://img.shields.io/badge/VectorDB-Chroma-green)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
+This project implements an **Agentic Retrieval-Augmented Generation (RAG) system** for analyzing legal contract clauses.
 
-This project implements a **multi-agent Retrieval-Augmented Generation (RAG) system**
-for analyzing legal contract clauses.
+Instead of relying on a single prompt, the system uses a multi-agent pipeline where specialized agents handle different stages of the analysis:
 
-The system uses an **LLM-based routing agent** to decide which legal knowledge bases
-to query, retrieves relevant legal information from **vector databases**, augments
-the context, and generates a **grounded legal risk analysis**.
+* LLM Router decides which legal knowledge bases are relevant.
 
-The architecture is built using **LangGraph for agent orchestration**, **Groq LLMs**
-for reasoning, and **ChromaDB for vector retrieval**.
+Vector Retriever fetches supporting legal context.
+
+Context Augmentor builds structured context.
+
+Reasoning Agent performs legal analysis using an LLM.
+
+Report Generator produces a structured risk report.
 
 
 ## Tech Stack
