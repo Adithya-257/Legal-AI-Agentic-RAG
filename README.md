@@ -51,10 +51,10 @@ Purpose: Helps the system interpret legal terms appearing in clauses.
    
    Example content:
    
-   * indemnification risks
-   * liability clauses
-   * confidentiality breaches
-   * dispute resolution issues
+   *  indemnification risks
+   *  liability clauses
+   *  confidentiality breaches
+   *  dispute resolution issues
   
 Purpose: Allows the system to detect risky clause structures and potential legal exposure.
 
@@ -75,9 +75,9 @@ Purpose: Allows the system to compare clauses against accepted legal standards.
 
    Example Content:
 
-    * risk summarization patterns
-    * legal analysis templates
-    * audit reasoning guidance
+    *  risk summarization patterns
+    *  legal analysis templates
+    *  audit reasoning guidance
    
   Purpose: Helps structure the final legal analysis and recommendations.
 
