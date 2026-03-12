@@ -21,26 +21,10 @@ Instead of relying on a single prompt, the system uses a multi-agent pipeline wh
   
 * Report Generator produces a structured risk report.
 
+The system uses **LangGraph for agent orchestration, Groq LLMs for reasoning, and ChromaDB** for vector retrieval.
 
-## Tech Stack
+The result is a **grounded legal analysis** system that cites evidence from retrieved documents instead of hallucinating answers.
 
-- Python
-- LangGraph (Agent orchestration)
-- Groq API (LLM inference)
-- ChromaDB (Vector database)
-- Sentence Transformers (Embeddings)
-- HuggingFace models
-- Retrieval-Augmented Generation (RAG)
-
-
-## Features
-
-✔ Multi-agent LLM architecture  
-✔ LLM-based intelligent routing  
-✔ Multi-database vector retrieval  
-✔ Context-aware legal reasoning  
-✔ Evidence-based analysis with citations  
-✔ Structured legal audit output
 
 
 
