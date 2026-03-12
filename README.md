@@ -11,15 +11,11 @@ This project implements an **Agentic Retrieval-Augmented Generation (RAG) system
 
 Instead of relying on a single prompt, the system uses a multi-agent pipeline where specialized agents handle different stages of the analysis:
 
-* LLM Router decides which legal knowledge bases are relevant.
-
-Vector Retriever fetches supporting legal context.
-
-Context Augmentor builds structured context.
-
-Reasoning Agent performs legal analysis using an LLM.
-
-Report Generator produces a structured risk report.
+*LLM Router decides which legal knowledge bases are relevant.
+*Vector Retriever fetches supporting legal context.
+*Context Augmentor builds structured context.
+*Reasoning Agent performs legal analysis using an LLM.
+*Report Generator produces a structured risk report.
 
 
 ## Tech Stack
