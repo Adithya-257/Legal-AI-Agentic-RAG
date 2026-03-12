@@ -155,7 +155,9 @@ Converts the structured output into a human-readable legal audit report.
 ###   Input
 
 <img width="289" height="95" alt="image" src="https://github.com/user-attachments/assets/ad7e357e-e30c-43e2-97bf-e6e1ae4b5346" />
+
 <img width="229" height="58" alt="image" src="https://github.com/user-attachments/assets/571c99be-cd46-4a03-b781-75ce3a707d5c" />
+
 ###   Output
 
 <img width="336" height="104" alt="image" src="https://github.com/user-attachments/assets/d4aa0ebf-7fe9-4bfe-9f9f-c1b0fa5c0bcb" />
