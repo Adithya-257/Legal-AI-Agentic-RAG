@@ -1,9 +1,6 @@
 """
 agent_graph.py
-LangGraph orchestration for the Legal Audit Agent pipeline.
-
-Pipeline:
-Routing → Retrieval → Context Augmentation → Reasoning
+LangGraph orchestration for Agentic Legal RAG pipeline
 """
 
 from typing import TypedDict, List, Literal
@@ -16,15 +13,11 @@ from agents.augmentor import ContextAugmentor
 from agents.reasoning_agent import ReasoningAgent
 
 
-# -------------------------------------------------------------------
-# STATE DEFINITION
-# -------------------------------------------------------------------
+# ─────────────────────────────────────────────────────────────────────────────
+# STATE
+# ─────────────────────────────────────────────────────────────────────────────
 
 class AgentState(TypedDict):
-    """
-    Shared state across the agent workflow.
-    """
-
     clause: str
 
     routing: dict
@@ -42,9 +35,9 @@ class AgentState(TypedDict):
     errors: List[str]
 
 
-# -------------------------------------------------------------------
-# AGENT INITIALIZATION
-# -------------------------------------------------------------------
+# ─────────────────────────────────────────────────────────────────────────────
+# INIT AGENTS
+# ─────────────────────────────────────────────────────────────────────────────
 
 router = MixtralRouter()
 retriever = DatabaseRetriever(vector_dbs_path="Vector_DBs")
@@ -52,24 +45,19 @@ augmentor = ContextAugmentor()
 reasoner = ReasoningAgent()
 
 
-# -------------------------------------------------------------------
-# NODE: ROUTING
-# -------------------------------------------------------------------
+# ─────────────────────────────────────────────────────────────────────────────
+# NODES
+# ─────────────────────────────────────────────────────────────────────────────
 
 def routing_node(state: AgentState) -> AgentState:
-    """LLM routing: decides which vector DBs to query."""
     start = time.time()
-
     try:
         decision = router.route(state["clause"])
-        elapsed = time.time() - start
-
         return {
             "routing": decision,
             "routing_confidence": decision.get("confidence", "medium"),
-            "step_times": {**state.get("step_times", {}), "routing": elapsed}
+            "step_times": {**state.get("step_times", {}), "routing": time.time() - start}
         }
-
     except Exception as e:
         return {
             "routing": {"databases": ["db_a_defs", "db_b_risks", "db_c_standards"]},
@@ -78,14 +66,8 @@ def routing_node(state: AgentState) -> AgentState:
         }
 
 
-# -------------------------------------------------------------------
-# NODE: RETRIEVAL
-# -------------------------------------------------------------------
-
 def retrieval_node(state: AgentState) -> AgentState:
-    """Retrieve relevant chunks from selected vector DBs."""
     start = time.time()
-
     try:
         results = retriever.retrieve(
             query=state["clause"],
@@ -93,7 +75,6 @@ def retrieval_node(state: AgentState) -> AgentState:
             top_k=3
         )
 
-        elapsed = time.time() - start
         total_chunks = sum(len(chunks) for chunks in results.values())
 
         return {
@@ -101,11 +82,10 @@ def retrieval_node(state: AgentState) -> AgentState:
             "retrieval_stats": {
                 "total_chunks": total_chunks,
                 "databases_queried": len(results),
-                "retrieval_time": elapsed
+                "retrieval_time": time.time() - start
             },
-            "step_times": {**state.get("step_times", {}), "retrieval": elapsed}
+            "step_times": {**state.get("step_times", {}), "retrieval": time.time() - start}
         }
-
     except Exception as e:
         return {
             "retrieved": {},
@@ -114,15 +94,105 @@ def retrieval_node(state: AgentState) -> AgentState:
         }
 
 
-# -------------------------------------------------------------------
-# NODE: CONTEXT AUGMENTATION
-# -------------------------------------------------------------------
-
 def augmentation_node(state: AgentState) -> AgentState:
-    """Build LLM context using retrieved chunks."""
     start = time.time()
-
     try:
         context = augmentor.build_context(
             clause=state["clause"],
-           
+            retrieval_results=state["retrieved"]
+        )
+
+        return {
+            "context": context,
+            "context_tokens": len(context) // 4,
+            "step_times": {**state.get("step_times", {}), "augmentation": time.time() - start}
+        }
+    except Exception as e:
+        return {
+            "context": f"Error building context: {str(e)}",
+            "context_tokens": 0,
+            "errors": state.get("errors", []) + [f"Augmentation error: {str(e)}"]
+        }
+
+
+def reasoning_node(state: AgentState) -> AgentState:
+    start = time.time()
+    try:
+        result = reasoner.analyze(state["context"])
+        return {
+            "analysis": result,
+            "step_times": {**state.get("step_times", {}), "reasoning": time.time() - start}
+        }
+    except Exception as e:
+        return {
+            "analysis": {"error": str(e)},
+            "errors": state.get("errors", []) + [f"Reasoning error: {str(e)}"]
+        }
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CONDITIONAL EDGES
+# ─────────────────────────────────────────────────────────────────────────────
+
+def should_retrieve(state: AgentState) -> Literal["retrieve", "skip"]:
+    if not state.get("routing", {}).get("databases") or state.get("routing_confidence") == "very_low":
+        return "skip"
+    return "retrieve"
+
+
+def needs_fallback(state: AgentState) -> Literal["augment", "fallback"]:
+    total = sum(len(chunks) for chunks in state.get("retrieved", {}).values())
+    return "fallback" if total == 0 else "augment"
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# FALLBACK
+# ─────────────────────────────────────────────────────────────────────────────
+
+def fallback_node(state: AgentState) -> AgentState:
+    context = f"""
+CLAUSE:
+{state['clause']}
+
+NOTE: No relevant knowledge retrieved. Analyze using general legal reasoning.
+"""
+    return {
+        "context": context,
+        "context_tokens": len(context) // 4,
+        "errors": state.get("errors", []) + ["No retrieval results"]
+    }
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# GRAPH
+# ─────────────────────────────────────────────────────────────────────────────
+
+def build_graph():
+    g = StateGraph(AgentState)
+
+    g.add_node("route", routing_node)
+    g.add_node("retrieve", retrieval_node)
+    g.add_node("augment", augmentation_node)
+    g.add_node("fallback", fallback_node)
+    g.add_node("reason", reasoning_node)
+
+    g.set_entry_point("route")
+
+    g.add_conditional_edges("route", should_retrieve, {
+        "retrieve": "retrieve",
+        "skip": "fallback"
+    })
+
+    g.add_conditional_edges("retrieve", needs_fallback, {
+        "augment": "augment",
+        "fallback": "fallback"
+    })
+
+    g.add_edge("augment", "reason")
+    g.add_edge("fallback", "reason")
+    g.add_edge("reason", END)
+
+    return g.compile()
+
+
+graph = build_graph()
