@@ -1,6 +1,6 @@
 import streamlit as st
-from graph.agent_graph import graph
-from agents.report_generator import ReportGenerator
+from Graph.agent_graph import graph
+from Agents.report_generator import ReportGenerator
 
 st.set_page_config(page_title="Legal Audit Agent", page_icon="⚖️")
 st.title("⚖️ Legal AI Audit Agent")
