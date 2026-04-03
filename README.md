@@ -2,7 +2,7 @@
 
 Multi-Agent Legal Contract Analyzer using LLM Routing, Vector Databases, and LangGraph
 
-![Python](https://img.shields.io/badge/Python-3.11-blue)
+![Python](https://img.shields.io/badge/Python-3.14-blue)
 ![LangGraph](https://img.shields.io/badge/LangGraph-Agentic%20AI-purple)
 ![ChromaDB](https://img.shields.io/badge/VectorDB-Chroma-green)
 
