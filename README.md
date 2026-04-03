@@ -132,13 +132,13 @@ Converts the structured output into a human-readable legal audit report.
 
 ## Tech Stack
 ```
-- Python
-- LangGraph — agent orchestration
-- Groq API — LLM inference
-- ChromaDB — vector database
-- Sentence Transformers — embeddings
-- HuggingFace Models
-- Retrieval-Augmented Generation (RAG)
+ Python
+ LangGraph — agent orchestration
+ Groq API — LLM inference
+ ChromaDB — vector database
+ Sentence Transformers — embeddings
+ HuggingFace Models
+ Retrieval-Augmented Generation (RAG)
 ```
 ## Features
 
