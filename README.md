@@ -131,7 +131,7 @@ Outputs structured JSON including:
 Converts the structured output into a human-readable legal audit report.
 
 ## Tech Stack
-
+```
 - Python
 - LangGraph — agent orchestration
 - Groq API — LLM inference
@@ -139,7 +139,7 @@ Converts the structured output into a human-readable legal audit report.
 - Sentence Transformers — embeddings
 - HuggingFace Models
 - Retrieval-Augmented Generation (RAG)
-
+```
 ## Features
 
 - Multi-agent LLM architecture
